@@ -5,6 +5,7 @@
 				<img alt="logo" src="./assets/images/logo.jpg" />
 			</router-link>
 			<router-link to="/">Home</router-link>
+			<router-link to="/favorites">Favorites</router-link>
 			<a href="https://vuejs.org/" target="_blank">Docs Vue</a>
 			<a href="https://github.com/ENG1N3X/vuejs-app-dmi" target="_blank">App Github</a>
 		</nav>

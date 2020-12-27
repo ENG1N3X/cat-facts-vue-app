@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		factsArr: [],
+		favArr: [],
 		error: "",
 	},
 	actions: {
@@ -13,6 +14,13 @@ export default new Vuex.Store({
 			try {
 				let response = await fetch(`https://cat-fact.herokuapp.com/facts/random?animal_type=${type}&amount=4`);
 				response = await response.json();
+
+				// Need to modified
+				for (const item of response) {
+					item.isFav = false;
+				}
+				// console.log(response)
+
 				if (response.length > 0) {
 					console.log("[getFactsByType] Fetching..", response);
 					commit("SET_FACTS_BY_TYPE", response);
@@ -33,6 +41,14 @@ export default new Vuex.Store({
 				state.factsArr = data;
 			}
 		},
+		SET_FAV_ITEM(state, fact) {
+			state.favArr.push(fact);
+		},
+		DELETE_FAV_ITEM(state, factID) {
+			state.favArr = state.favArr.filter((item) => {
+				return item._id != factID;
+			});
+		},
 		SET_ERROR(state, error) {
 			state.error = error;
 		},
@@ -44,6 +60,7 @@ export default new Vuex.Store({
 	},
 	getters: {
 		factsArr: (state) => state.factsArr,
+		favArr: (state) => state.favArr,
 		error: (state) => state.error,
 	},
 });

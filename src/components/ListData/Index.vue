@@ -7,7 +7,7 @@
 			</select>
 		</div>
 		<div class="data-items">
-			<app-list-data-item v-for="data in filteredData" :key="data._id" :data="data" />
+			<app-list-data-item v-for="data in filteredData" :key="data._id" :data="data"/>
 		</div>
 	</div>
 </template>
