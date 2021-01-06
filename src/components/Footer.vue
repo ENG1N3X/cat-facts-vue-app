@@ -1,7 +1,7 @@
 <template>
   <footer>
         <span>Author {{ info.author }}</span>
-        <a :href="`${info.github_url}`" target="_blank">Github {{ info.nickname }}</a>
+        <a :href="info.github_url" target="_blank">Github {{ info.nickname }}</a>
   </footer>
 </template>
 

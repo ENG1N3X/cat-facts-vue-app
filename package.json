@@ -1,5 +1,5 @@
 {
-  "name": "vuejs-app-dmi",
+  "name": "cat-facts-vue-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "moment": "^2.29.1",
-    "serve-static": "^1.14.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"

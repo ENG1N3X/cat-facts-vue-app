@@ -21,9 +21,8 @@ export default new Vuex.Store({
 				}
 				// console.log(response)
 
-				if (response.length > 0) {
-					console.log("[getFactsByType] Fetching..", response);
-					commit("SET_FACTS_BY_TYPE", response);
+				if (response.length) {
+					commit("CONCAT_FACTS_OBJECTS", response);
 					commit("CLEAR_ERROR", `Search by ${type}`);
 				} else {
 					commit("SET_ERROR", "Nothing found");
@@ -34,19 +33,17 @@ export default new Vuex.Store({
 		},
 	},
 	mutations: {
-		SET_FACTS_BY_TYPE(state, data) {
-			if (state.factsArr.length > 0) {
-				state.factsArr = [...JSON.parse(JSON.stringify(state.factsArr)), ...JSON.parse(JSON.stringify(data))];
-			} else {
-				state.factsArr = data;
-			}
+		CONCAT_FACTS_OBJECTS(state, factsObj) {
+			state.factsArr = state.factsArr.length ? [...state.factsArr, ...factsObj] : factsObj;
 		},
 		SET_FAV_ITEM(state, fact) {
+			fact.isFav = true
 			state.favArr.push(fact);
 		},
-		DELETE_FAV_ITEM(state, factID) {
+		DELETE_FAV_ITEM(state, fact,) {
+			fact.isFav = false
 			state.favArr = state.favArr.filter((item) => {
-				return item._id != factID;
+				return item._id != fact._id;
 			});
 		},
 		SET_ERROR(state, error) {

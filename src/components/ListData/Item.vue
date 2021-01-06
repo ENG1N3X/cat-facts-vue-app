@@ -1,9 +1,9 @@
 <template>
 	<div class="data-item">
-		<span class="type">Type: {{ data.type }}</span>
-		<span class="text">{{ data.text }}</span>
-		<span class="date">Created: {{ formatDate(data.createdAt) }}</span>
-		<button :class="{ fav: data.isFav }" class="btn btn-fav" type="button" @click="toggleFav(data)">F</button>
+		<span class="type">the {{ item.type }} fact</span>
+		<span class="text">{{ item.text }}</span>
+		<span class="date">Created: {{ formatDate() }}</span>
+		<button :class="{ fav: item.isFav }" class="btn btn-fav" type="button" @click="toggleFav">F</button>
 	</div>
 </template>
 
@@ -13,22 +13,21 @@ import moment from "moment";
 export default {
 	name: "Item",
 	props: {
-		data: {
+		item: {
 			type: Object,
 			required: true,
-		},
+		}
 	},
 	methods: {
-		formatDate(value) {
-			return moment(String(value)).format("hh:mm MM/DD/YYYY");
+		formatDate() {
+			return moment(String(this.item.createdAt)).format("hh:mm MM/DD/YYYY");
 		},
-		toggleFav(fact) {
-			if (fact.isFav) {
-				this.$store.commit("DELETE_FAV_ITEM", fact._id);
+		toggleFav() {
+			if (this.item.isFav) {
+				this.$store.commit("DELETE_FAV_ITEM", this.item);
 			} else {
-				this.$store.commit("SET_FAV_ITEM", fact);
+				this.$store.commit("SET_FAV_ITEM", this.item);
 			}
-			fact.isFav = !fact.isFav;
 		},
 	},
 };

@@ -3,11 +3,11 @@
 		<div class="hero">
 			<h1>{{ page.title }}</h1>
 			<select class="facts-filter" v-model="factsFilter.selected">
-				<option v-for="option in factsFilter.options" :key="option" :value="option"> Type - {{ option }} </option>
+				<option v-for="option in factsFilter.options" :key="option" :value="option">{{ option }}</option>
 			</select>
 		</div>
 		<div class="data-items">
-			<app-list-data-item v-for="data in filteredData" :key="data._id" :data="data"/>
+			<app-list-data-item v-for="item in filteredData" :key="item._id" :item="item" />
 		</div>
 	</div>
 </template>

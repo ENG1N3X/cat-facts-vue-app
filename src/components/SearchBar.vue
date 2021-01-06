@@ -1,7 +1,7 @@
 <template>
 	<div class="search-bar">
 		<label for="search-bar__input">{{ searchLabel }}</label>
-		<input v-model="searchValue" v-on:keyup.enter="getSearchValue(searchValue)" type="text" id="search-bar__input" class="search-bar__input" placeholder="cat" minlength="1" maxlength="24" />
+		<input v-model="searchValue" v-on:keyup.enter="getSearchValue" type="text" id="search-bar__input" class="search-bar__input" placeholder="cat" minlength="1" maxlength="24" />
 		<span class="search-status">{{ showStatus }}</span>
 	</div>
 </template>
@@ -21,12 +21,13 @@ export default {
 		},
 	},
 	methods: {
-		async getSearchValue(value) {
-			if (value.length > 0) {
+		async getSearchValue() {
+			if (this.searchValue.length) {
 				try {
-					await this.$store.dispatch("getFactsByType", value.toLowerCase());
+					await this.$store.dispatch("getFactsByType", this.searchValue.toLowerCase());
+					this.searchValue = ""
 				} catch (error) {
-					alert(error);
+					alert(error.message);
 					console.error(error);
 				}
 			}

@@ -1,7 +1,11 @@
-const express = require('express');
-const serveStatic = require("serve-static");
+require('dotenv').config()
 const path = require('path');
+const express = require('express');
 const app = express();
-app.use(serveStatic(path.join(__dirname, 'dist')));
-const port = process.env.PORT || 80;
-app.listen(port);
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+const PORT = process.env.PORT || 80;
+app.listen(PORT, function() {
+    console.log(`Server started on port ${PORT}`)
+});
